@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolyo | Modern One Page</title>
+    <title>Ozz's Portfolio | Modern One Page</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -16,7 +16,7 @@
             --text-color: #f8fafc;
             --text-muted: #94a3b8;
             
-            /* --- YENİ RENK: Canlı Turuncu Vurgu --- */
+            /* Turuncu Vurgu Renkleri */
             --accent-color: #f97316; 
             --accent-glow: rgba(249, 115, 22, 0.4);
             
@@ -32,6 +32,7 @@
         }
 
         html {
+            scroll-behavior: smooth;
             height: 100%;
             overflow-x: hidden;
         }
@@ -119,7 +120,7 @@
 
         /* Tam Ekran Bölümler (Sections) */
         .section {
-            height: 100vh;
+            min-height: 100vh;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -131,11 +132,12 @@
 
         /* Hero Bölümü */
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1.2rem;
-            line-height: 1.2;
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
             text-align: center;
+            letter-spacing: -1.5px;
         }
 
         .hero h1 span {
@@ -189,12 +191,39 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        /* Hakkımda Kutusu */
+        /* --- FOTOĞRAF VE HAKKIMDA DÜZENİ --- */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .profile-img-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .profile-img {
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 25px var(--accent-glow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 35px rgba(249, 115, 22, 0.6);
+        }
+
         .about-box {
-            max-width: 800px;
-            text-align: center;
+            text-align: left;
             line-height: 1.8;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--text-muted);
         }
 
@@ -254,13 +283,12 @@
 
         /* Footer */
         footer {
-            position: absolute;
-            bottom: 2.5rem;
+            margin-top: 2rem;
             color: var(--text-muted);
             font-size: 0.85rem;
         }
 
-        /* --- İSTEDİĞİNİZ DEĞİŞİKLİK: Sayfa Altındaki Turuncu Bant --- */
+        /* Sayfa Altındaki Turuncu Bant */
         .orange-bar {
             position: absolute;
             bottom: 0;
@@ -273,11 +301,13 @@
 
         /* Mobil Uyum */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
+            .hero h1 { font-size: 3rem; }
             .hero p { font-size: 1rem; }
             .slider-dots { display: none; }
             nav { display: none; }
             .section { padding: 0 1.5rem; }
+            .about-container { flex-direction: column; text-align: center; gap: 1.5rem; }
+            .about-box { text-align: center; }
             .skills-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
@@ -286,7 +316,7 @@
 
     <!-- Header -->
     <header>
-        <div class="logo" onclick="scrollToSection('home')">Portfolyo<span>.</span></div>
+        <div class="logo" onclick="scrollToSection('home')">Ozz<span>.</span></div>
         <nav>
             <a onclick="scrollToSection('home')" class="nav-link active" data-target="home">Ana Sayfa</a>
             <a onclick="scrollToSection('about')" class="nav-link" data-target="about">Hakkımda</a>
@@ -305,18 +335,23 @@
 
     <!-- Section 1: Hero -->
     <section id="home" class="section hero">
-        <h1>Geleceğin Web Teknolojilerini <span>Tasarlıyorum</span></h1>
+        <h1><span>Ozz's Portfolio</span></h1>
         <p>Modern arayüzler, yüksek performanslı web çözümleri ve kullanıcı odaklı dijital deneyimler geliştiriyorum.</p>
         <a onclick="scrollToSection('contact')" class="btn">İletişime Geç <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></a>
     </section>
 
-    <!-- Section 2: Hakkımda -->
+    <!-- Section 2: Hakkımda (Fotoğraflı Düzen) -->
     <section id="about" class="section">
         <h2 class="section-title">Hakkımda</h2>
-        <div class="glass-card about-box">
-            <p>
-                Teknoloji ve yazılım dünyasına tutkuyla bağlı bir geliştiriciyim. Web mimarileri, modern ön yüz (front-end) geliştirmeleri ve dijital sistemlerin optimizasyonu üzerine projeler üretiyorum. Temiz kod prensipleri ve estetik tasarımlarla fikirleri dijital ürünlere dönüştürmekten keyif alıyorum.
-            </p>
+        <div class="about-container">
+            <div class="profile-img-wrapper">
+                <img src="profile.jpg" alt="Ozan" class="profile-img">
+            </div>
+            <div class="glass-card about-box">
+                <p>
+                    Teknoloji ve yazılım dünyasına tutkuyla bağlı bir geliştiriciyim. Web mimarileri, modern ön yüz (front-end) geliştirmeleri ve dijital sistemlerin optimizasyonu üzerine projeler üretiyorum. Temiz kod prensipleri ve estetik tasarımlarla fikirleri dijital ürünlere dönüştürmekten keyif alıyorum.
+                </p>
+            </div>
         </div>
     </section>
 
@@ -355,13 +390,12 @@
             <a href="mailto:ornek@email.com" class="btn"><i class="fa-solid fa-paper-plane" style="margin-right: 8px;"></i> Mesaj Gönder</a>
         </div>
         <footer>
-            <p>&copy; 2026 Portfolyo. Tüm hakları saklıdır.</p>
+            <p>&copy; 2026 Ozz's Portfolio. Tüm hakları saklıdır.</p>
         </footer>
-        <!-- En Alt Turuncu Çizgi -->
         <div class="orange-bar"></div>
     </section>
 
-    <!-- JavaScript ile Soft Scroll -->
+    <!-- JavaScript ile Kesin ve Kararlı Soft Scroll -->
     <script>
         function scrollToSection(sectionId) {
             const target = document.getElementById(sectionId);
