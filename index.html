@@ -3,46 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolyo | Kişisel Web Sitesi</title>
+    <title>Portfolyo | Modern One Page</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
+            --bg-color: #0b0f19;
+            --card-bg: rgba(22, 31, 48, 0.7);
+            --card-border: rgba(255, 255, 255, 0.08);
             --text-color: #f8fafc;
             --text-muted: #94a3b8;
             --accent-color: #38bdf8;
-            --accent-hover: #0ea5e9;
+            --accent-glow: rgba(56, 189, 248, 0.3);
+            /* --- DEĞİŞİKLİK BURADA: Yeni Yetenekler Kart Rengi --- */
+            --skills-card-bg: rgba(56, 189, 248, 0.05); /* Çok hafif mavi arka plan */
+            --skills-card-glow: rgba(56, 189, 248, 0.2); /* Kart etrafında mavi ışıltı */
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* One-Page Slider Temel Yapısı */
+        html {
+            height: 100%;
+            overflow-x: hidden;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
+            height: 100%;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.12) 0px, transparent 50%);
+            background-attachment: fixed;
         }
 
+        /* Üst Menü Header */
         header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            background: rgba(11, 15, 25, 0.6);
+            border-bottom: 1px solid var(--card-border);
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
+            color: var(--text-color);
+            letter-spacing: -0.5px;
+            cursor: pointer;
+        }
+
+        .logo span {
             color: var(--accent-color);
         }
 
@@ -50,171 +78,318 @@
             color: var(--text-muted);
             text-decoration: none;
             margin-left: 2rem;
-            transition: color 0.3s;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        nav a:hover {
+        nav a:hover, nav a.active {
             color: var(--accent-color);
         }
 
-        .hero {
+        /* Yan Taraf Nokta Navigasyonu (Slider Dots) */
+        .slider-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            z-index: 1000;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: block;
+        }
+
+        .dot:hover, .dot.active {
+            background: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        /* Tam Ekran Bölümler (Sections) */
+        .section {
+            height: 100vh;
+            width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            min-height: 70vh;
-            padding: 0 1rem;
-            max-width: 800px;
-            margin: 0 auto;
+            padding: 0 10%;
+            position: relative;
         }
 
+        /* Hero Bölümü */
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
             font-weight: 700;
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
+            text-align: center;
         }
 
         .hero h1 span {
-            color: var(--accent-color);
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--text-muted);
-            margin-bottom: 2rem;
+            max-width: 650px;
+            text-align: center;
+            margin-bottom: 2.5rem;
         }
 
         .btn {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
+            display: inline-block;
+            background: var(--accent-color);
+            color: #000;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 0 20px var(--accent-glow);
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .btn:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
         }
 
-        section {
-            max-width: 1000px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-
-        section h2 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
+        /* İçerik Başlıkları */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
             text-align: center;
-            border-bottom: 2px solid var(--card-bg);
-            padding-bottom: 0.5rem;
+            position: relative;
         }
 
+        /* Glassmorphism Kartlar */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(16px);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Hakkımda Kutusu */
+        .about-box {
+            max-width: 800px;
+            text-align: center;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* Beceriler Grid */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1.5rem;
+            width: 100%;
+            max-width: 900px;
         }
 
         .skill-card {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
+            /* --- DEĞİŞİKLİK BURADA: Yetenek Kartlarının Yeni Stili --- */
+            background: var(--skills-card-bg); /* Hafif mavi arka plan */
+            border: 1px solid var(--accent-color); /* Mavi kenarlık */
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
             text-align: center;
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px var(--skills-card-glow); /* Mavi ışıltı */
         }
 
         .skill-card:hover {
-            transform: translateY(-5px);
+            border-color: #fff; /* Hoverda beyaz kenarlık */
+            transform: translateY(-8px) scale(1.02); /* Daha belirgin hover */
+            box-shadow: 0 15px 35px var(--skills-card-glow); /* Hoverda artan ışıltı */
         }
 
         .skill-card i {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: var(--accent-color);
             margin-bottom: 1rem;
         }
 
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            color: var(--text-muted);
-            border-top: 1px solid var(--card-bg);
-            margin-top: 4rem;
+        .skill-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            /* --- DEĞİŞİKLİK BURADA: Başlık Rengi Beyaz --- */
+            color: #fff; 
         }
 
+        .skill-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* İletişim Kutusu */
+        .contact-box {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .contact-box p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            position: absolute;
+            bottom: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Mobil Uyum */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            nav {
-                display: none;
-            }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            .slider-dots { display: none; }
+            nav { display: none; }
+            .section { padding: 0 1.5rem; }
+            .skills-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Header -->
     <header>
-        <div class="logo">Portfolyo.</div>
+        <div class="logo" onclick="scrollToSection('home')">Portfolyo<span>.</span></div>
         <nav>
-            <a href="#hakkimda">Hakkımda</a>
-            <a href="#yetenekler">Yetenekler</a>
-            <a href="#iletisim">İletişim</a>
+            <a onclick="scrollToSection('home')" class="nav-link active" data-target="home">Ana Sayfa</a>
+            <a onclick="scrollToSection('about')" class="nav-link" data-target="about">Hakkımda</a>
+            <a onclick="scrollToSection('skills')" class="nav-link" data-target="skills">Yetenekler</a>
+            <a onclick="scrollToSection('contact')" class="nav-link" data-target="contact">İletişim</a>
         </nav>
     </header>
 
-    <section class="hero">
-        <h1>Merhaba, Ben <span>İsim Soyisim</span></h1>
-        <p>Modern web siteleri ve kullanıcı deneyimleri tasarlayan bir geliştiriciyim. Dijital dünyadaki fikirlerinizi hayata geçiriyorum.</p>
-        <a href="#iletisim" class="btn">İletişime Geç</a>
+    <!-- Yan Taraf Slider Noktaları -->
+    <div class="slider-dots">
+        <span onclick="scrollToSection('home')" class="dot active" data-target="home" title="Ana Sayfa"></span>
+        <span onclick="scrollToSection('about')" class="dot" data-target="about" title="Hakkımda"></span>
+        <span onclick="scrollToSection('skills')" class="dot" data-target="skills" title="Yetenekler"></span>
+        <span onclick="scrollToSection('contact')" class="dot" data-target="contact" title="İletişim"></span>
+    </div>
+
+    <!-- Section 1: Hero -->
+    <section id="home" class="section hero">
+        <h1>Geleceğin Web Teknolojilerini <span>Tasarlıyorum</span></h1>
+        <p>Modern arayüzler, yüksek performanslı web çözümleri ve kullanıcı odaklı dijital deneyimler geliştiriyorum.</p>
+        <a onclick="scrollToSection('contact')" class="btn">İletişime Geç <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></a>
     </section>
 
-    <section id="hakkimda">
-        <h2>Hakkımda</h2>
-        <p style="text-align: center; color: var(--text-muted); max-width: 700px; margin: 0 auto;">
-            Teknolojiye, yazılıma ve tasarıma tutkuyla bağlıyım. Temiz kod yazmayı, kullanıcı dostu arayüzler oluşturmayı ve sürekli yeni teknolojiler öğrenmeyi seviyorum.
-        </p>
+    <!-- Section 2: Hakkımda -->
+    <section id="about" class="section">
+        <h2 class="section-title">Hakkımda</h2>
+        <div class="glass-card about-box">
+            <p>
+                Teknoloji ve yazılım dünyasına tutkuyla bağlı bir geliştiriciyim. Web mimarileri, modern ön yüz (front-end) geliştirmeleri ve dijital sistemlerin optimizasyonu üzerine projeler üretiyorum. Temiz kod prensipleri ve estetik tasarımlarla fikirleri dijital ürünlere dönüştürmekten keyif alıyorum.
+            </p>
+        </div>
     </section>
 
-    <section id="yetenekler">
-        <h2>Yetenekler</h2>
+    <!-- Section 3: Yetenekler -->
+    <section id="skills" class="section">
+        <h2 class="section-title">Yetenekler & Uzmanlıklar</h2>
         <div class="skills-grid">
             <div class="skill-card">
                 <i class="fa-brands fa-html5"></i>
-                <h3>HTML5 / CSS3</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Modern ve responsive yapılar</p>
+                <h3>Frontend Architecture</h3>
+                <p>HTML5, CSS3, Modern Grid & Flexbox yapıları</p>
             </div>
             <div class="skill-card">
                 <i class="fa-brands fa-js"></i>
-                <h3>JavaScript</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Dinamik arayüz etkileşimleri</p>
+                <h3>JavaScript & UI</h3>
+                <p>Dinamik etkileşimler ve ES6+ standartları</p>
             </div>
             <div class="skill-card">
                 <i class="fa-brands fa-react"></i>
-                <h3>React & UI</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Modern web teknolojileri</p>
+                <h3>Modern Frameworks</h3>
+                <p>Component tabanlı arayüz geliştirme</p>
             </div>
             <div class="skill-card">
-                <i class="fa-solid fa-server"></i>
-                <h3>Backend / IoT</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Sistem ve operasyon yönetimi</p>
+                <i class="fa-solid fa-network-wired"></i>
+                <h3>Systems & IoT</h3>
+                <p>Operasyon, entegrasyon ve altyapı takibi</p>
             </div>
         </div>
     </section>
 
-    <section id="iletisim" style="text-align: center;">
-        <h2>İletişim</h2>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Benimle e-posta yoluyla doğrudan iletişime geçebilirsiniz.</p>
-        <a href="mailto:ornek@email.com" class="btn"><i class="fa-solid fa-envelope"></i> E-Posta Gönder</a>
+    <!-- Section 4: İletişim -->
+    <section id="contact" class="section">
+        <h2 class="section-title">Projenizi Birlikte Hayata Geçirelim</h2>
+        <div class="glass-card contact-box">
+            <p>Bir projeniz veya fikriniz mi var? Aşağıdaki bağlantı üzerinden benimle e-posta yoluyla doğrudan iletişime geçebilirsiniz.</p>
+            <a href="mailto:ornek@email.com" class="btn"><i class="fa-solid fa-paper-plane" style="margin-right: 8px;"></i> Mesaj Gönder</a>
+        </div>
+        <footer>
+            <p>&copy; 2026 Portfolyo. Tüm hakları saklıdır.</p>
+        </footer>
     </section>
 
-    <footer>
-        <p>&copy; 2026 Tüm Hakları Saklıdır.</p>
-    </footer>
+    <!-- JavaScript ile Yumuşak Kaydırma (Soft Scroll) Kontrolü -->
+    <script>
+        function scrollToSection(sectionId) {
+            const target = document.getElementById(sectionId);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
 
+        // Hangi ekranda olunduğuna göre menü ve noktaları aktif yapma
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const dots = document.querySelectorAll('.dot');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-target') === current) {
+                    link.classList.add('active');
+                }
+            });
+
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('data-target') === current) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
