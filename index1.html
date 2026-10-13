@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolyo | Kişisel Web Sitesi</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-color: #38bdf8;
+            --accent-hover: #0ea5e9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 70vh;
+            padding: 0 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        section {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            border-bottom: 2px solid var(--card-bg);
+            padding-bottom: 0.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-card i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-muted);
+            border-top: 1px solid var(--card-bg);
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Portfolyo.</div>
+        <nav>
+            <a href="#hakkimda">Hakkımda</a>
+            <a href="#yetenekler">Yetenekler</a>
+            <a href="#iletisim">İletişim</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Merhaba, Ben <span>İsim Soyisim</span></h1>
+        <p>Modern web siteleri ve kullanıcı deneyimleri tasarlayan bir geliştiriciyim. Dijital dünyadaki fikirlerinizi hayata geçiriyorum.</p>
+        <a href="#iletisim" class="btn">İletişime Geç</a>
+    </section>
+
+    <section id="hakkimda">
+        <h2>Hakkımda</h2>
+        <p style="text-align: center; color: var(--text-muted); max-width: 700px; margin: 0 auto;">
+            Teknolojiye, yazılıma ve tasarıma tutkuyla bağlıyım. Temiz kod yazmayı, kullanıcı dostu arayüzler oluşturmayı ve sürekli yeni teknolojiler öğrenmeyi seviyorum.
+        </p>
+    </section>
+
+    <section id="yetenekler">
+        <h2>Yetenekler</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fa-brands fa-html5"></i>
+                <h3>HTML5 / CSS3</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Modern ve responsive yapılar</p>
+            </div>
+            <div class="skill-card">
+                <i class="fa-brands fa-js"></i>
+                <h3>JavaScript</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Dinamik arayüz etkileşimleri</p>
+            </div>
+            <div class="skill-card">
+                <i class="fa-brands fa-react"></i>
+                <h3>React & UI</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Modern web teknolojileri</p>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-server"></i>
+                <h3>Backend / IoT</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Sistem ve operasyon yönetimi</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="iletisim" style="text-align: center;">
+        <h2>İletişim</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Benimle e-posta yoluyla doğrudan iletişime geçebilirsiniz.</p>
+        <a href="mailto:ornek@email.com" class="btn"><i class="fa-solid fa-envelope"></i> E-Posta Gönder</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Tüm Hakları Saklıdır.</p>
+    </footer>
+
+</body>
+</html>
