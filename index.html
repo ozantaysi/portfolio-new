@@ -3,217 +3,364 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolyo | Kişisel Web Sitesi</title>
+    <title>Ozan Taysı — Portfolio</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-color: #38bdf8;
-            --accent-hover: #0ea5e9;
+            --bg-color: #1c1d20;
+            --card-bg: #292a2d;
+            --text-main: #ffffff;
+            --text-muted: #999999;
+            --accent: #455ce9; /* Snellenberg tarzı mavi aksan */
+            --border-color: rgba(255, 255, 255, 0.1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-color);
+            color: var(--text-main);
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            overflow-x: hidden;
         }
 
+        /* --- HEADER / NAVIGATION --- */
         header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2.5rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
+            z-index: 100;
+            mix-blend-mode: difference;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
         }
 
         nav a {
-            color: var(--text-muted);
+            color: var(--text-main);
             text-decoration: none;
-            margin-left: 2rem;
-            transition: color 0.3s;
+            font-size: 1rem;
+            font-weight: 500;
+            position: relative;
+            transition: opacity 0.3s ease;
         }
 
         nav a:hover {
-            color: var(--accent-color);
+            opacity: 0.6;
         }
 
+        /* --- HERO SECTION --- */
         .hero {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            min-height: 70vh;
-            padding: 0 1rem;
-            max-width: 800px;
-            margin: 0 auto;
+            justify-content: flex-end;
+            padding: 0 5% 8rem 5%;
+            position: relative;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .hero h1 span {
-            color: var(--accent-color);
-        }
-
-        .hero p {
+        .hero-sub {
             font-size: 1.2rem;
             color: var(--text-muted);
             margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .btn {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
+        .hero-title {
+            font-size: clamp(3.5rem, 9vw, 9.5rem);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -3px;
+            margin-bottom: 4rem;
+        }
+
+        .hero-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+        }
+
+        .hero-desc {
+            max-width: 450px;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        /* Magnetik Buton Efekti */
+        .btn-round {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-decoration: none;
             font-weight: 600;
-            transition: background 0.3s, transform 0.2s;
+            font-size: 1.1rem;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+            cursor: pointer;
         }
 
-        .btn:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
+        .btn-round:hover {
+            transform: scale(1.1);
+            background-color: #3346c6;
         }
 
-        section {
-            max-width: 1000px;
-            margin: 4rem auto;
-            padding: 0 2rem;
+        /* --- SECTION GENEL --- */
+        .section {
+            padding: 10rem 5%;
+            border-top: 1px solid var(--border-color);
         }
 
-        section h2 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            border-bottom: 2px solid var(--card-bg);
-            padding-bottom: 0.5rem;
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5rem;
         }
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-card {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .skill-card i {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
-
-        footer {
-            text-align: center;
-            padding: 3rem 0;
+        .section-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             color: var(--text-muted);
-            border-top: 1px solid var(--card-bg);
-            margin-top: 4rem;
         }
 
+        /* --- ABOUT SECTION --- */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            font-weight: 500;
+            line-height: 1.3;
+            letter-spacing: -1px;
+        }
+
+        .profile-card {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--card-bg);
+        }
+
+        .profile-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: transform 0.6s ease, filter 0.6s ease;
+        }
+
+        .profile-card:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        /* --- WORK / SERVICES LIST --- */
+        .work-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .work-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            text-decoration: none;
+            color: var(--text-main);
+            transition: padding 0.4s ease, color 0.3s ease;
+        }
+
+        .work-item:hover {
+            padding-left: 2rem;
+            padding-right: 2rem;
+            color: var(--text-muted);
+        }
+
+        .work-item h3 {
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            font-weight: 600;
+            letter-spacing: -1.5px;
+        }
+
+        .work-item span {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* --- CONTACT / FOOTER --- */
+        .contact-section {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #141517;
+            margin: 0 -5%;
+            padding: 8rem 10% 4rem 10%;
+        }
+
+        .contact-title {
+            font-size: clamp(3rem, 7vw, 7rem);
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .contact-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 3rem;
+            margin-top: 5rem;
+        }
+
+        .socials {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .socials a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .socials a:hover {
+            color: var(--accent);
+        }
+
+        /* MOBİL UYUM */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            nav {
-                display: none;
-            }
+            header { padding: 1.5rem 5%; }
+            nav { display: none; }
+            .hero-footer { flex-direction: column; align-items: flex-start; gap: 2rem; }
+            .about-content { grid-template-columns: 1fr; }
+            .contact-footer { flex-direction: column; gap: 2rem; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Header -->
     <header>
-        <div class="logo">Portfolyo.</div>
+        <a href="#" class="logo">© Code by Ozan</a>
         <nav>
-            <a href="#hakkimda">Hakkımda</a>
-            <a href="#yetenekler">Yetenekler</a>
-            <a href="#iletisim">İletişim</a>
+            <a href="#about">Hakkımda</a>
+            <a href="#services">Hizmetler</a>
+            <a href="#contact">İletişim</a>
         </nav>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
-        <h1>Merhaba, Ben <span>İsim Soyisim</span></h1>
-        <p>Modern web siteleri ve kullanıcı deneyimleri tasarlayan bir geliştiriciyim. Dijital dünyadaki fikirlerinizi hayata geçiriyorum.</p>
-        <a href="#iletisim" class="btn">İletişime Geç</a>
+        <p class="hero-sub">Geliştirici & Sistem Mimarı</p>
+        <h1 class="hero-title">Ozan Taysı.</h1>
+        <div class="hero-footer">
+            <p class="hero-desc">
+                Modern web mimarileri, performanslı dijital arayüzler ve entegre IoT sistem çözümleri üretiyorum.
+            </p>
+            <a href="#contact" class="btn-round">İletişim</a>
+        </div>
     </section>
 
-    <section id="hakkimda">
-        <h2>Hakkımda</h2>
-        <p style="text-align: center; color: var(--text-muted); max-width: 700px; margin: 0 auto;">
-            Teknolojiye, yazılıma ve tasarıma tutkuyla bağlıyım. Temiz kod yazmayı, kullanıcı dostu arayüzler oluşturmayı ve sürekli yeni teknolojiler öğrenmeyi seviyorum.
-        </p>
-    </section>
-
-    <section id="yetenekler">
-        <h2>Yetenekler</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <i class="fa-brands fa-html5"></i>
-                <h3>HTML5 / CSS3</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Modern ve responsive yapılar</p>
-            </div>
-            <div class="skill-card">
-                <i class="fa-brands fa-js"></i>
-                <h3>JavaScript</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Dinamik arayüz etkileşimleri</p>
-            </div>
-            <div class="skill-card">
-                <i class="fa-brands fa-react"></i>
-                <h3>React & UI</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Modern web teknolojileri</p>
-            </div>
-            <div class="skill-card">
-                <i class="fa-solid fa-server"></i>
-                <h3>Backend / IoT</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Sistem ve operasyon yönetimi</p>
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="section-header">
+            <span class="section-title">01 / HAKKIMDA</span>
+        </div>
+        <div class="about-content">
+            <p class="about-text">
+                Fikirleri kusursuz dijital deneyimlere dönüştürme tutkusuyla çalışıyorum. Tasarım ve mühendisliğin kesişiminde yenilikçi çözümler sunuyorum.
+            </p>
+            <div class="profile-card">
+                <img src="profile.jpg" alt="Ozan Taysı">
             </div>
         </div>
     </section>
 
-    <section id="iletisim" style="text-align: center;">
-        <h2>İletişim</h2>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Benimle e-posta yoluyla doğrudan iletişime geçebilirsiniz.</p>
-        <a href="mailto:ornek@email.com" class="btn"><i class="fa-solid fa-envelope"></i> E-Posta Gönder</a>
+    <!-- Services / Work Section -->
+    <section id="services" class="section">
+        <div class="section-header">
+            <span class="section-title">02 / UZMANLIKLAR</span>
+        </div>
+        <div class="work-list">
+            <div class="work-item">
+                <h3>Frontend Development</h3>
+                <span>React, Modern Web</span>
+            </div>
+            <div class="work-item">
+                <h3>UI / UX Design</h3>
+                <span>Arayüz Tasarımı</span>
+            </div>
+            <div class="work-item">
+                <h3>IoT & System Architecture</h3>
+                <span>Haberleşme & Entegrasyon</span>
+            </div>
+            <div class="work-item">
+                <h3>WordPress & Web</h3>
+                <span>Custom Elementor, CSS</span>
+            </div>
+        </div>
     </section>
 
-    <footer>
-        <p>&copy; 2026 Tüm Hakları Saklıdır.</p>
+    <!-- Contact Section -->
+    <footer id="contact" class="contact-section">
+        <div>
+            <span class="section-title" style="color: var(--text-muted);">03 / İLETİŞİM</span>
+            <h2 class="contact-title" style="margin-top: 2rem;">Birlikte harika projeler üretelim.</h2>
+        </div>
+
+        <div class="contact-footer">
+            <p style="color: var(--text-muted);">&copy; 2026 Ozan Taysı. Tüm hakları saklıdır.</p>
+            <div class="socials">
+                <a href="mailto:ornek@email.com">E-Posta</a>
+                <a href="https://github.com" target="_blank">GitHub</a>
+                <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+            </div>
+        </div>
     </footer>
 
 </body>
